@@ -10,16 +10,17 @@ app.get("/",(req,res)=>{
     res.sendFile(__dirname+"/index.html");
 });
 
-io.on("connected",(socket)=>{
+io.on("connection",(socket)=>{
     console.log("a User Connected ...");
     socket.on("chat",(msg)=>{
         io.emit("chat",msg);
     }),
-    socket.on("disconnected",(socket)=>{
+    socket.on("disconnect",(socket)=>{
         console.log("User Disconnected ...");
     });
 });
 
 server.listen(PORT,()=>{
     console.log(`Server Listenning On http://localhost:${PORT}`);
+
 });
